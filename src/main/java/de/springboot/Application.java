@@ -20,8 +20,4 @@ public class Application {
         return "hello-world";
     }
 
-    @RequestMapping("/")
-    public String showMain(){
-        return "hello-world";
-    }
 }
