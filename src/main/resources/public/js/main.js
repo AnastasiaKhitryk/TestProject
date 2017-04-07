@@ -1,31 +1,12 @@
 var app = angular.module("springDemo",[]);
 
-app.controller("AppCtrl",function($scope){
-    $scope.websites = [{
-        iconImageUrl:'',
-        id: '3421',
-        website:'vk.com',
-        title:'ВКонтакте',
-        description:'ВКонтакте vk.com социальные сети'
-    },{
-        iconImageUrl:'',
-        id: '3398',
-        website:'mail.ru',
-        title:'Mail ru',
-        description:'Почтовый клиент'
-    },{
-        iconImageUrl:'',
-        id: '3421',
-        website:'vk.com',
-        title:'ВКонтакте',
-        description:'ВКонтакте vk.com социальные сети'
-    },{
-        iconImageUrl:'',
-        id: '3398',
-        website:'mail.ru',
-        title:'Mail ru',
-        description:'Почтовый клиент'
-    }];
+app.controller("AppCtrl",function($scope, $http){
+    $scope.websites = [];
+
+    //$http.get('http://localhost:8099/api/stackoverflow');
+    // success(function(data){
+    //     $scope.websites = data;
+    // });
 
 
     // <tr ng-repeat="item in websites">
@@ -35,4 +16,14 @@ app.controller("AppCtrl",function($scope){
     // <td>{{item.website}}</td>
     // <td>{{item.description}}</td>
     // </tr>
+
+    $http({
+        method: 'GET',
+        url: 'http://localhost:8099/api/stackoverflow'
+    }).then(function successCallback(response) {
+        $scope.websites = response.data;
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    });
 });
